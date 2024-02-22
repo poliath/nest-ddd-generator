@@ -60,10 +60,10 @@ const createFiles = (basePath, files, moduleName, fillWithDummyContent) => {
     });
 };
 
-// Generate the structure based on module name
-const generateStructure = (moduleName, fillWithDummyContent) => {
+// Generate the structure based on module name and target directory
+const generateStructure = (targetDirectory, moduleName, fillWithDummyContent) => {
     const modulePlural = pluralize.plural(moduleName);
-    const basePath = path.join(__dirname, modulePlural);
+    const basePath = path.join(targetDirectory, modulePlural); // Use the target directory
 
     // Define directories and files to be created
     const dirs = [
@@ -94,19 +94,21 @@ const generateStructure = (moduleName, fillWithDummyContent) => {
     createFiles(basePath, files, moduleName, fillWithDummyContent);
 };
 
-// Main function to prompt user for module name and generate structure
+// Main function to prompt user for module name and target directory, then generate structure
 const main = () => {
     const readline = require('readline').createInterface({
         input: process.stdin,
         output: process.stdout
     });
 
-    readline.question('Enter module name (singular): ', (moduleName) => {
-        const moduleNameLowerCase = moduleName.toLowerCase();
-        readline.question('Fill files with dummy content? (Y/n): ', (answer) => {
-            const fillWithDummyContent = answer.toLowerCase() === 'y';
-            generateStructure(moduleNameLowerCase, fillWithDummyContent);
-            readline.close();
+    readline.question('Enter target directory (e.g., src/modules): ', (targetDirectory) => {
+        readline.question('Enter module name (singular): ', (moduleName) => {
+            const moduleNameLowerCase = moduleName.toLowerCase();
+            readline.question('Fill files with dummy content? (Y/n): ', (answer) => {
+                const fillWithDummyContent = answer.toLowerCase() === 'y';
+                generateStructure(targetDirectory, moduleNameLowerCase, fillWithDummyContent);
+                readline.close();
+            });
         });
     });
 };
