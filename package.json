@@ -1,0 +1,22 @@
+{
+  "name": "nest_ddd_generator",
+  "version": "1.0.0",
+  "description": "A utility to generate folder and file structures for NestJS modules following DDD principles.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "generate": "node index.js"
+  },
+  "keywords": [
+    "NestJS",
+    "DDD",
+    "Generator",
+    "Module"
+  ],
+  "author": "MVT Solutions Group LTD",
+  "license": "MIT",
+  "dependencies": {
+    "pluralize": "^8.0.0",
+    "readline": "^1.3.0"
+  }
+}

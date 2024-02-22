@@ -1,0 +1,20 @@
+# Dependency directory
+node_modules/
+
+# Environment configuration
+.env
+
+# Log files
+*.log
+
+# Optional npm cache directory
+.npm/
+
+# Optional eslint cache
+.eslintcache
+
+# JetBrains IDEs project folder
+.idea/
+
+# MacOS folder attribute files
+.DS_Store
