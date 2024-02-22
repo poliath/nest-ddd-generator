@@ -11,27 +11,28 @@ const capitalizeFirstLetter = (string) => {
 const getTemplateContent = (filePath, moduleName) => {
     // Mapping of file paths to template names
     const templateMap = {
-        [`domain/${moduleName}.ts`]: 'domain.template.js',
-        [`dto/create-${moduleName}.dto.ts`]: 'create-dto.template.js',
-        [`dto/query-${moduleName}.dto.ts`]: 'query-dto.template.js',
-        [`dto/update-${moduleName}.dto.ts`]: 'update-dto.template.js',
-        [`infrastructure/persistence/document/entities/${moduleName}.schema.ts`]: 'entities.template.js',
-        [`infrastructure/persistence/document/mappers/${moduleName}.mapper.ts`]: 'mappers.template.js',
-        [`infrastructure/persistence/document/repository/${moduleName}.repository.ts`]: 'repository.template.js',
-        [`${pluralize.plural(moduleName)}.controller.ts`]: 'controller.template.js',
-        [`${pluralize.plural(moduleName)}.module.ts`]: 'module.template.js',
-        [`${pluralize.plural(moduleName)}.service.ts`]: 'service.template.js',
-        [`infrastructure/persistence/document/document-persistence.module.ts`]: 'document-persistence.module.template.js',
-        [`infrastructure/persistence/${moduleName}.repository.ts`]: 'abstract-repository.template.js',
+        [`domain/${moduleName}.ts`]: 'domain.template.ts',
+        [`dto/create-${moduleName}.dto.ts`]: 'create-dto.template.ts',
+        [`dto/query-${moduleName}.dto.ts`]: 'query-dto.template.ts',
+        [`dto/update-${moduleName}.dto.ts`]: 'update-dto.template.ts',
+        [`infrastructure/persistence/document/entities/${moduleName}.schema.ts`]: 'entities.template.ts',
+        [`infrastructure/persistence/document/mappers/${moduleName}.mapper.ts`]: 'mappers.template.ts',
+        [`infrastructure/persistence/document/repository/${moduleName}.repository.ts`]: 'repository.template.ts',
+        [`${pluralize.plural(moduleName)}.controller.ts`]: 'controller.template.ts',
+        [`${pluralize.plural(moduleName)}.module.ts`]: 'module.template.ts',
+        [`${pluralize.plural(moduleName)}.service.ts`]: 'service.template.ts',
+        [`infrastructure/persistence/document/document-persistence.module.ts`]: 'document-persistence.module.template.ts',
+        [`infrastructure/persistence/${moduleName}.repository.ts`]: 'abstract-repository.template.ts',
     };
 
-    // Find the template file name based on the current file being processed
     const templateFile = Object.keys(templateMap).find(key => filePath.endsWith(key));
     if (templateFile) {
         const templatePath = path.join(__dirname, 'templates', templateMap[templateFile]);
-        const templateContent = fs.readFileSync(templatePath, 'utf8');
-        return templateContent.replace(/\{\{ModuleName\}\}/g, capitalizeFirstLetter(moduleName))
-            .replace(/\{\{moduleName\}\}/g, moduleName);
+        let templateContent = fs.readFileSync(templatePath, 'utf8');
+        templateContent = templateContent.replace(/\{\{ModuleName\}\}/g, capitalizeFirstLetter(moduleName))
+            .replace(/\{\{moduleName\}\}/g, moduleName)
+            .replace(/\{\{moduleNamePlural\}\}/g, pluralize.plural(moduleName));
+        return templateContent;
     }
     return '// Template not found\n';
 };
