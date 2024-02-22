@@ -1,11 +1,14 @@
 {
-  "name": "nest_ddd_generator",
+  "name": "nest-ddd-generator",
   "version": "1.0.0",
   "description": "A utility to generate folder and file structures for NestJS modules following DDD principles.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "generate": "node index.js"
+  },
+  "bin": {
+    "nest-ddd-gen": "./index.js"
   },
   "keywords": [
     "NestJS",
@@ -18,5 +21,9 @@
   "dependencies": {
     "pluralize": "^8.0.0",
     "readline": "^1.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/poliath/nest-ddd-generator.git"
   }
 }
