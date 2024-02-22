@@ -1,6 +1,6 @@
 {
   "name": "nest-ddd-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A utility to generate folder and file structures for NestJS modules following DDD principles.",
   "main": "index.js",
   "scripts": {
